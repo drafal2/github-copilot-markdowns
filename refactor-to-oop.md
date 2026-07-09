@@ -5,6 +5,8 @@ model: Claude Opus 4.8
 tools: [**TODO**]
 ---
 
+# Refactar to OOP
+
 ## Overview
 
 Change code structure to follow object-oriented programming (OOP) principles when source code is written using functional programming paradigm. Aiming to evolution, not revolution.

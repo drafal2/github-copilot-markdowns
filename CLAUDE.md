@@ -32,6 +32,9 @@
 ## Project structure
 - [**TODO**]
 
+## Logging
+- [**TODO**]
+
 ## Workflow Orchestration
 
 ### 1. Plan Mode Default
