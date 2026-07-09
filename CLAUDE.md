@@ -11,12 +11,26 @@
 
 ## Naming
 - **English language**
-- Always use names for modules, classes and functions that describe what they do 
+- Always use names for modules, classes and functions that describe what they do
 - Use variable names that describe the object that is assigned to them
 
 ## Docstrings 
 - **NumPy-style** with vertical signatures (one parameter per line for 2+ params beyond `self`) with type annotations present, do not repeat types in the `Parameters` section
 - **ALWAYS** in Polish language
+- Write in simple, clear, and unambiguous language
+- Ensure all information, especially code snippets and technical details, is correct and up-to-date
+- Always prioritize the user's goal. Every document must help a specific user achieve a specific task
+- Maintain a consistent tone, terminology, and style across all documentation
+
+## In-line comments
+- **ALWAYS** in english language
+- **DO NOT** comment obvious states
+- Comment workarounds
+- Explain complex logic
+- Explain **WHY**, not what
+
+## Project structure
+- [**TODO**]
 
 ## Workflow Orchestration
 
@@ -60,42 +74,6 @@
 - **Capture Lessons**: Update tasks/lessons.md after corrections
 
 ### Core Principles
-- **Simplicity First**: Make every change as simple as possible. Impact minimal code.
-- **No Laziness**: Find root causes. No temporary fixes. Senior developer standards.
-- **Minimal Impact**: Changes should only touch what's necessary. Avoid introducing bugs.
-
-## Commands
-
-Always use `.venv/Scripts/python` instead of `python` to ensure the venv interpreter is used.
-
-```bash
-# Run all tests
-.venv/Scripts/python -m pytest tests/ -q
-
-# Run a single test file
-.venv/Scripts/python -m pytest tests/test_schedule.py -q
-
-# Run a single test by name
-.venv/Scripts/python -m pytest tests/test_schedule.py::test_function_name -q
-```
-
-## Git
-
-Use Git following instructions in @git.instructions.md
-
-## Working Conventions
-
-- **Notebooks** — clear all cell outputs before committing; `nbstripout` git hook is configured to enforce this.
-- **Subagent model selection** — when delegating to a subagent, pick the model deliberately. Use **Haiku** for mechanical work (file search, symbol lookup, cross-package sweeps, mass mechanical edits) — cost win, no cache penalty. Use **Opus** for the `Plan` subagent and other delegated reasoning tasks **when the goal is to keep the parent context clean** (e.g. parent is already heavy, or reasoning would pull in many large files). Plan inline by default — only delegate planning when context isolation is the actual reason. Default to the parent's model otherwise.
-
-## Logging
-
-Library code is configuration-free: every module declares its own logger and installs no handlers. Output is configured at the entry point (notebook, script, or test) by calling `setup_logging()` from the top-level `logging_config.py`, which loads `logging.yaml` via `logging.config.dictConfig`.
-### Performance rule
-
-### Channel split: `warnings.warn` vs `logger`
-
-- **`warnings.warn(..., UserWarning)`** — user-facing data-quality signals the caller might want to suppress with `warnings.filterwarnings`. Example: `QuoteHierarchy` discarding a lower-priority quote on a maturity-date collision (`market_structures/rates/bootstrapper.py`).
-- **`logger.warning(...)`** — operational/diagnostic concerns the caller does not need to suppress per-call. Example: bisection hit max iterations.
-
-If unsure: would the user want to silence this with `filterwarnings` for a specific test or call? If yes, `warnings`. Otherwise `logger`.
+- **Simplicity First**: Make every change as simple as possible. Impact minimal code
+- **No Laziness**: Find root causes. No temporary fixes. Senior developer standards
+- **Minimal Impact**: Changes should only touch what's necessary. Avoid introducing bugs
